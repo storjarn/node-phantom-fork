@@ -217,6 +217,7 @@ module.exports={
 						exit:function(callback){
 							phantom.removeListener('exit',prematureExitHandler); //an exit is no longer premature now
 							request(connectionSocket,[0,'exit'],callbackOrDummy(callback));
+              phantom.kill('SIGTERM');
 						},
 						on: function(){
 							phantom.on.apply(phantom, arguments);
