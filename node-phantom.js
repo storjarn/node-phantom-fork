@@ -175,7 +175,6 @@ module.exports={
 						case 'pageSetDone':
 						case 'pageJsIncluded':
 						case 'cookieAdded':
-						case 'pageRendered':
 						case 'pageEventSent':
 						case 'pageFileUploaded':
 						case 'pageSetViewportDone':
@@ -183,6 +182,10 @@ module.exports={
 							cmds[cmdId].cb(null);
 							delete cmds[cmdId];
 							break;
+						case 'pageRendered':
+              delete cmds[cmdId];
+              break;
+
 						default:
 							console.error('got unrecognized response:'+response);
 							break;
