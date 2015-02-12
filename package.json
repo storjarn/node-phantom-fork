@@ -1,7 +1,7 @@
 {
   "author": "Alex Scheel Meyer (http://www.linkedin.com/in/alexscheelmeyer)",
   "contributors": [{
-    name:"cytb"
+    "name" :"cytb"
   }],
   "name": "node-phantom-fork",
   "description": "bridge between node.js and PhantomJS (fork version of node-phantom)",
