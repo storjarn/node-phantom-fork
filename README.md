@@ -1,11 +1,31 @@
-THIS PACKAGE IS NOT THE ORIGINAL VERSION OF "node-phantom"
 ---------------
 
-[![Build Status](https://secure.travis-ci.org/alexscheelmeyer/node-phantom.png)](https://travis-ci.org/alexscheelmeyer/node-phantom)
+[![Build Status](https://secure.travis-ci.org/cytb/node-phantom-fork.png)](https://travis-ci.org/cytb/node-phantom-fork)
+
+[![NPM version](https://badge.fury.io/js/node-phantom-fork.png)](https://badge.fury.io/js/node-phantom-fork)
+[![Dependency Status](https://david-dm.org/cytb/node-phantom-fork.png)](https://david-dm.org/cytb/node-phantom-fork)
+[![devDependency Status](https://david-dm.org/cytb/node-phantom-fork/dev-status.png)](https://david-dm.org/cytb/node-phantom-fork#info=devDependencies)
+
+<!--
+[![Build Status](https://secure.travis-ci.org/alexscheelmeyer/node-phantom.png)](https://travis-ci.org/alexscheelmeyer/node-phantom-fork)
 
 [![NPM version](https://badge.fury.io/js/node-phantom.png)](https://badge.fury.io/js/node-phantom)
 [![Dependency Status](https://david-dm.org/alexscheelmeyer/node-phantom.png)](https://david-dm.org/alexscheelmeyer/node-phantom)
 [![devDependency Status](https://david-dm.org/alexscheelmeyer/node-phantom/dev-status.png)](https://david-dm.org/alexscheelmeyer/node-phantom#info=devDependencies)
+-->
+
+This package is fork version of "node-phantom".
+---------------
+I merged some pull requests in original "node-phantom" repository.
+
+It includes fix of issues
+  callback issue
+  socket.io dependency
+  living phantom-js process
+  
+and enhancements
+  post() function (POST method request)
+  using travis
 
 Node-phantom
 ---------------
@@ -31,7 +51,7 @@ For running the tests you will need [Mocha](http://visionmedia.github.io/mocha/)
 Installing
 ----------
 
-    npm install node-phantom
+    npm install node-phantom-fork
 
 
 Usage

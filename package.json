@@ -1,16 +1,19 @@
 {
   "author": "Alex Scheel Meyer (http://www.linkedin.com/in/alexscheelmeyer)",
-  "name": "node-phantom",
-  "description": "bridge between node.js and PhantomJS",
+  "contributors": [{
+    name:"cytb"
+  }],
+  "name": "node-phantom-fork",
+  "description": "bridge between node.js and PhantomJS (fork version of node-phantom)",
   "version": "0.2.6",
   "license": "Public Domain",
-  "homepage": "https://github.com/alexscheelmeyer/node-phantom",
+  "homepage": "https://github.com/cytb/node-phantom-fork",
   "bugs": {
-    "url": "https://github.com/alexscheelmeyer/node-phantom/issues"
+    "url": "https://github.com/cytb/node-phantom-fork/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/alexscheelmeyer/node-phantom.git"
+    "url": "git://github.com/cytb/node-phantom-fork.git"
   },
   "main": "node-phantom.js",
   "scripts": {
