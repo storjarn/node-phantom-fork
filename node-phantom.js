@@ -224,7 +224,7 @@ module.exports = {
                             phantom.removeListener('exit', prematureExitHandler); //an exit is no longer premature now
                             request(connectionSocket, [0, 'exit'], callbackOrDummy(callback));
                             // phantom.kill('SIGTERM');
-                            process.kill(phantom.id);
+                            process.kill();
                         },
                         on: function () {
                             phantom.on.apply(phantom, arguments);
