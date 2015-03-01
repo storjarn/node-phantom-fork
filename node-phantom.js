@@ -13,6 +13,8 @@ function unwrapArray(arr) {
     return arr && arr.length == 1 ? arr[0] : arr
 }
 
+var processes = [];
+
 module.exports = {
     create: function (callback, options) {
         if (options === undefined) options = {};
@@ -27,6 +29,7 @@ module.exports = {
             args = args.concat([__dirname + '/bridge.js', port]);
 
             var phantom = child.spawn(options.phantomPath, args);
+            processes.push(phantom);
             phantom.stdout.on('data', function (data) {
                 return console.log('phantom stdout: ' + data);
             });
@@ -50,14 +53,14 @@ module.exports = {
                 "Content-Type": "text/html"
             });
             response.end('<html><head><script src="/socket.io/socket.io.js" type="text/javascript"></script><script type="text/javascript">\n\
-				window.onload=function(){\n\
-					var socket = new io.connect("http://" + window.location.hostname);\n\
-					socket.on("cmd", function(msg){\n\
-						alert(msg);\n\
-					});\n\
-					window.socket = socket;\n\
-				};\n\
-			</script></head><body></body></html>');
+                window.onload=function(){\n\
+                    var socket = new io.connect("http://" + window.location.hostname);\n\
+                    socket.on("cmd", function(msg){\n\
+                        alert(msg);\n\
+                    });\n\
+                    window.socket = socket;\n\
+                };\n\
+            </script></head><body></body></html>');
         }).listen(null, '127.0.0.1', function () {
             var io = socketio.listen(server, {
                 'log level': 1
@@ -81,7 +84,7 @@ module.exports = {
 
                 function request(socket, args, callback) {
                     args.splice(1, 0, cmdid);
-                    //					console.log('requesting:'+args);
+                    //                  console.log('requesting:'+args);
                     socket.emit('cmd', JSON.stringify(args));
 
                     cmds[cmdid] = {
@@ -92,7 +95,7 @@ module.exports = {
                 var connectionSocket = null;
                 io.sockets.on('connection', function (socket) {
                     socket.on('res', function (response) {
-                        //						console.log(response);
+                        //                      console.log(response);
                         var id = response[0];
                         var cmdId = response[1];
                         switch (response[2]) {
@@ -223,8 +226,12 @@ module.exports = {
                         exit: function (callback) {
                             phantom.removeListener('exit', prematureExitHandler); //an exit is no longer premature now
                             request(connectionSocket, [0, 'exit'], callbackOrDummy(callback));
-                            // phantom.kill('SIGTERM');
-                            process.kill();
+                            phantom.kill('SIGTERM');
+                            // for(var i = 0; i < processes.length; ++i) {
+                            //     if (processes[i].pid) {
+                            //         process.kill(processes[i].pid);
+                            //     }
+                            // }
                         },
                         on: function () {
                             phantom.on.apply(phantom, arguments);
@@ -250,3 +257,11 @@ module.exports = {
         });
     }
 };
+
+process.on('exit', function() {
+    for(var i = 0; i < processes.length; ++i) {
+        if (processes[i].pid) {
+            process.kill(processes[i].pid);
+        }
+    }
+});
